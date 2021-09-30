@@ -7,14 +7,20 @@ using System;
 [ExecuteAlways]
 public class CoordinateLaberer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Color defaultColor = Color.white;
+    [SerializeField] Color blockedColor = Color.gray;
 
     TextMeshPro label;
     Vector2Int coordinates= new Vector2Int();
-
+    Waypoint waypoint;
+    Shader shader;
     private void Awake()
     {
         label = GetComponent<TextMeshPro>();
+
+        label.enabled = false;
+        waypoint = GetComponentInParent<Waypoint>();
+        shader = label.GetComponent<Shader>();
         DisplayCoordinates();
     }
     void Start()
@@ -29,6 +35,30 @@ public class CoordinateLaberer : MonoBehaviour
         {
             DisplayCoordinates();
             UpdateObjectName();
+        }
+
+        ColorCoordinates();
+        ToggleLabels();
+    }
+    void ToggleLabels()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            label.enabled = !label.IsActive();
+        }
+    }
+
+    private void ColorCoordinates()
+    {
+        
+       // label.GetComponent<Shader>();
+        if (!waypoint.IsPlaceable)
+        {
+            label.color = blockedColor;
+        }
+        else
+        {
+            label.color = defaultColor;
         }
     }
 
