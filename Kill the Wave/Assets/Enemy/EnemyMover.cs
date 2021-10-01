@@ -7,6 +7,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [SerializeField][Range(0f,5f)] float speed = 1f;
 
+    Enemy enemy;
     public Waypoint startLocation { get { return path[0]; } }
     // Start is called before the first frame update
     void OnEnable()
@@ -15,6 +16,10 @@ public class EnemyMover : MonoBehaviour
         GetToStart();
         StartCoroutine(FollowPath());
         
+    }
+    private void Start()
+    {
+        enemy = GetComponent<Enemy>();
     }
     void GetToStart()
     {
@@ -49,6 +54,7 @@ public class EnemyMover : MonoBehaviour
             
         }
 
+        enemy.WithdrawGold();
         gameObject.SetActive(false);
     }
     // Update is called once per frame
