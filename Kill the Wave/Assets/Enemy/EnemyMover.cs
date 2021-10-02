@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
@@ -33,8 +35,19 @@ public class EnemyMover : MonoBehaviour
 
         foreach (Transform childTile in pathParent.transform)
         {
-            path.Add(childTile.GetComponent<Waypoint>());
+            Waypoint waypoint = childTile.GetComponent<Waypoint>();
+            if (waypoint!=null)
+            {
+                path.Add(waypoint);
+            }
+            
         }
+    }
+
+    void FinishPath()
+    {
+        enemy.WithdrawGold();
+        gameObject.SetActive(false);
     }
     IEnumerator FollowPath()
     {
@@ -54,9 +67,9 @@ public class EnemyMover : MonoBehaviour
             
             
         }
-       // gd.CreateTheText(enemy.GoldPenalty ,transform.position,5f);
-        enemy.WithdrawGold();
-        gameObject.SetActive(false);
+        FinishPath();
+        // gd.CreateTheText(enemy.GoldPenalty ,transform.position,5f);
+
     }
     // Update is called once per frame
     void Update()

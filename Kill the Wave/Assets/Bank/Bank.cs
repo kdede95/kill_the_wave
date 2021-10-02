@@ -11,13 +11,14 @@ public class Bank : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI displayBalance;
-    
+   // [SerializeField] TextMeshProUGUI towerCost;
     public int CurrentBalance { get { return currentBalance; } }
     // Start is called before the first frame update
 
     private void Awake()
     {
         currentBalance = startingBalance;
+        UpdateDisplay();
     }
     public void Deposit(int amount)
     {
@@ -27,12 +28,13 @@ public class Bank : MonoBehaviour
     public void Withdraw(int amount)
     {
         currentBalance -= Mathf.Abs(amount);
-        
+        UpdateDisplay();
+        // towerCost.text = amount.ToString();
         if (currentBalance<0)
         {
             ReloadScene();
         }
-        UpdateDisplay();
+        
 
     }
 
