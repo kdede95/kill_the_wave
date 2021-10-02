@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Tower : MonoBehaviour
 {
 
     [SerializeField] int towerCost = 75;
+    [SerializeField] TextMeshProUGUI towerCostDisplay;
     // Start is called before the first frame update
     public bool CreateTower(Tower tower,Vector3 position)
     {

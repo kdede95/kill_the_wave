@@ -8,6 +8,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField][Range(0f,5f)] float speed = 1f;
 
     Enemy enemy;
+   // GoldDisplayerer gd;
     public Waypoint startLocation { get { return path[0]; } }
     // Start is called before the first frame update
     void OnEnable()
@@ -53,7 +54,7 @@ public class EnemyMover : MonoBehaviour
             
             
         }
-
+       // gd.CreateTheText(enemy.GoldPenalty ,transform.position,5f);
         enemy.WithdrawGold();
         gameObject.SetActive(false);
     }
