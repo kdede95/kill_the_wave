@@ -42,7 +42,7 @@ public class EnemyMover : MonoBehaviour
    public void RecalculatePath(bool resetPath)
     {
         Vector2Int coordinates = new Vector2Int();
-        if (!resetPath)
+        if (resetPath)
         {
             coordinates = pathfinder.StartCoordinates;
         }
@@ -53,7 +53,7 @@ public class EnemyMover : MonoBehaviour
 
         StopAllCoroutines();
         path.Clear();
-        path = pathfinder.GetNewPath();
+        path = pathfinder.GetNewPath(coordinates);
 
         StartCoroutine(FollowPath());
     }

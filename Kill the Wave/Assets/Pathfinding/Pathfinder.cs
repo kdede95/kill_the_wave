@@ -81,7 +81,7 @@ public class Pathfinder : MonoBehaviour
         BreadthFirstSearch(coordinates);
         return BuildPath();
     }
-    void BreadthFirstSearch(Vector2Int startCoordinates)
+    void BreadthFirstSearch(Vector2Int coordinates)
     {
         startNode.isWalkable = true;
         destinationNode.isWalkable = true;
@@ -90,8 +90,8 @@ public class Pathfinder : MonoBehaviour
         reached.Clear();
         bool isRunning = true;
 
-        frontier.Enqueue(grid[startCoordinates]);
-        reached.Add(startCoordinates, grid[startCoordinates]);
+        frontier.Enqueue(grid[coordinates]);
+        reached.Add(coordinates, grid[coordinates]);
 
         while (frontier.Count>0 && isRunning)
         {
